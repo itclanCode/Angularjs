@@ -1,5 +1,18 @@
 <ul>
     <app-user-item 
-     *ngFor="let name of names">
+     *ngFor="let individualUserName of names"
+     [name]="individualUserName">
     </app-user-item>
 </ul>
+<!-- 
+    在app-user-item标签上添加了新属性[name] = "name",在Angular中,添加一个带方括号的属性(比如:[foo])
+    意味着把一个值传给该组件上同名的输入属性(比如foo)
+    在上面的这个例子中,name右侧的值来自ngFor中的let name...语句,也就是说对于下列代码
+    [name]部分指定的是UserItemComponent上的input,注意我们正在传入的并不是字符串字面量"individualUserName"，而是individualUserName变量的值
+    也就是names中的每个元素
+    1. 在names中迭代
+    2. 为names中的每个元素创建一个新的UserItemComponent
+    3. 把昂前名字的值传给UserItemComponent上名叫name的Input属性
+    
+
+ -->
