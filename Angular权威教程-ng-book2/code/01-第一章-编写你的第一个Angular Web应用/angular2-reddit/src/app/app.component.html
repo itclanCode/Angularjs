@@ -3,11 +3,16 @@
 
   <div class="field">
     <label for="title">Title:</label>
-    <input name="title">  <!-- changed -->
+    <input name="title" #newtitle>  <!-- changed -->
+    <!-- 这段标记告诉Angular把这个input绑定到变量newtitle上,#newtitle语法被称为一个解析(resolve),其效果是让变量newtitle可用于该视图的所有表达式中
+         newtitle现在是一个对象,它代表了这个input DOM对象(更确切的说,它的类型是HTMLInputElement),由于newtitle是一个对象,我们可以通过newtitle.value表达式来获取输入框的值
+
+         同样,我们把#newlink添加到了另一个input标签上,因此也可以用它来提取这个输入框的值
+    -->
   </div>
   <div class="field">
     <label for="link">Link:</label>
-    <input name="link"> <!-- changed -->
+    <input name="link" #newlink> <!-- changed -->
   </div>
 
   <!-- added this button -->
@@ -24,3 +29,11 @@
     [article]="article">
   </app-article>
 </div>
+<!-- 
+   在input标签上使用了#(hash)来要求Angular把该元素赋值给一个局部变量,通过把#title和#link添加到适当的<input />元素上,就可以把他们作为变量传给按钮上的addArticle()函数
+   1. 在模板中创建一个button标签,向用户表明应该点击哪里
+   2. 新建了一个名叫addArticle的函数,来定义按钮被点击时要做的事情
+   3. 在button上添加了一个(click)属性,意思是:只要点击了这个按钮,就运行addArticle函数
+   4. 在两个input标签上分别添加了#newtitle和#newlink属性
+
+ -->
