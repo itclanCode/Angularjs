@@ -27,7 +27,7 @@ import { Article } from './article.model';
   }
 })
 export class ArticleComponent implements OnInit {
-  votes: number;  // 一个数字,用来表示所有赞,减去所有‘踩’的数量之和
+ /*  votes: number;  // 一个数字,用来表示所有赞,减去所有‘踩’的数量之和
   title: string;  // 一个字符串,用来存放文章的标题
   link: string;   // 一个字符串,用来存放文章的URL
 
@@ -35,10 +35,10 @@ export class ArticleComponent implements OnInit {
     this.title = 'Angular2';
     this.link = 'http://angular.io';
     this.votes =  10;
-  }
+  } */
   @Input() article: Article;
 
-  voteUp(): boolean {
+  voteUp(): boolean {  // 组件上的voteUp()函数是与组件的视图有关的
     this.article.voteUp();
     return false;
   }

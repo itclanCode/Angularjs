@@ -7,7 +7,7 @@ import {Article } from './article/article.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  articles: Article[];
+  articles: Article[]; // articles是Article的数组,另一种写法是Array<Article>,这种模式称为泛型
 
   constructor() {
     this.articles = [
