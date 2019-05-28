@@ -1,2 +1,2 @@
 # Angular
-Angular学习笔记
+Angular权威教程学习笔记
