@@ -113,3 +113,188 @@ console.log('Role', Role[0], '', Role[1], 'and', Role[2]);
 为了运行本章的例子,可以安装一个小工具,名为TSUN(TypeScript Upgraded Node),支持TypeScript升级版Node
 * npm install -g tsun 
 
+### 2.4.6 任意类型
+
+如果我们没有为变量指定类型,那它的默认类型就是any, 在TypeScript中,any类型的变量能够接收任意类型的数据
+
+```
+var something: any = 'as string';
+
+something = 1;
+something =  [1, 2, 3];
+```
+
+### 无类型
+
+void以为这我们不期望那里有类型,它通常用作函数的返回值,表示没有任何返回值
+```
+function setName(name: string): void {
+   this.name = name;
+}
+```
+
+### 2.5 类
+
+javascript Es5采用的是基于原型的面向对象设计，这种设计模型不使用类,而是依赖于原型
+
+不过在Es6中,终于有内置的类了
+
+用class关键字来定义一个类,紧随其后后的是类名和类的代码块
+
+```
+class Venicle {
+
+}
+```
+
+类可以包含属性,方法以及构造函数
+
+### 2.5.1 属性
+
+属性定义了类实例对象的数据,比如名叫Person的类可能有first_name,last_name和age属性
+
+类中的每个属性都可以包含一个可选的类型,比如:我们可以把first_name和last_name声明为字符串类型string,把age声明为数字类型(number)
+
+Person类的声明是这样的
+```
+class Person {
+  first_name: string;
+  last_name: string;
+  age: number
+}
+```
+
+### 2.5.2 方法
+
+方法是运行在类对象实例上下文中的函数,在调用对象的方法之前,必须要有这个对象的实例
+
+要实例化一个类,我们使用New关键字,比如new Person()会创建一个Person类的实例对象
+
+如果我们希望问候某个Person,就可以这样写
+```
+class Person {
+  first_name: string;
+  last_name: string;
+  age: number;
+
+  greet() {
+     console.log("Hello", this.first_name);
+  }
+
+}
+
+```
+
+注意借助this关键字,我们能用this.first_name表达式来访问Person类的first_name属性
+
+如果没有显示声明过方法的返回类型和返回值,就会假定它可能返回任何东西(即any类型）然而,因为这里没有任何显示的return语句,所以实际返回的类型是void
+
+注意:void类型也是一种合法的any类型
+
+调用greet方法之前,我们要有一个Person类的实例对象,代码如下
+
+```
+var p: person;// 声明一个变量,类型为person
+
+p = new Person(); // 实例化一个构造函数
+
+p.first_name = "Fielipe";
+
+p.greet();
+
+我们还可以将对象的声明和实例化缩写为一行代码
+var p: Person = new Person()
+```
+假设我们希望Person类有一个带返回值的方法,比如:要获取某个Person在数年后的年龄,我们可以这样写
+```
+class Person {
+  first_name: string;
+  last_name: string;
+  age: number;
+
+  greet() {
+    console.log("Hello", this.first_name);
+  }
+
+  ageInYears() {
+      return this.age + years;
+   }
+
+   // instantiate a new Person instance
+   var p: Person = new Person();
+
+   // set initial age
+   p.age = 6;
+
+   // how old will he be in 12 years
+   p.ageInyears(12);
+ }
+```
+
+### 构造函数
+
+构造函数是当类进行实例化时执行的特殊函数,通常会在构造函数中对新对象进行初始化工作
+
+构造函数必须命名为constructor，因为构造函数是在类被实例化时调用的,所以它们可以有输入参数,但不能有任何返回值
+
+我们要通过调用New className()来执行构造函数,以完成类的实例化
+
+当类没有显示的定义构造函数时,将自动创建一个无参数构造函数
+
+```
+class Vehicle {
+
+}
+
+var v = new Vehicle();
+它等价于
+class Venicle {
+  constructor(){
+  
+  }
+}
+
+var v = new Vehicle();
+
+在TypeScript中,每个类只能有一个构造函数,这是违背Es6的标准的,一个类可以拥有不同参数数量的多个构造函数重载实现
+```
+
+我们可以使用带擦书的构造函数来将对象的创建工作参数化
+
+比如:我们可以对Person类使用构造函数来初始化它的数据
+
+```
+class Person {
+  first_name: string;
+  last_name: string;
+  age: number;
+
+  constructor(first_name: string, last_name: string, age: number) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.age = age;
+  }
+
+  greet() {
+    console.log("Hello", this.first_name);
+  }
+
+  ageInYears(years:number):number {
+     return this.age + years;
+  }
+}
+```
+
+用下面的这种方法重写前面的例子要容易些:
+```
+var p: Person = new Person('Felipe', 'Coury', 36);
+p.greet();
+
+当创建这个对象的时候,其姓名,年龄都会被初始化
+```
+
+### 2.5.4 继承
+
+面向对象的另一个重要的特性就是继承,继承表明子类能够从父类得到它的行为,然后,我们就可以在这个子类中重写,修改及添加行为
+
+
